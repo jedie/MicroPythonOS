@@ -108,18 +108,18 @@ from mpos import BatteryManager
 def adc_to_voltage(raw_adc_value):
     """
     The percentage calculation uses MIN_VOLTAGE = 3.15 and MAX_VOLTAGE = 4.15
-    0% at 3.15V -> raw_adc_value = 270
+    0% at 3.15V -> raw_adc_value = 210
     100% at 4.15V -> raw_adc_value = 310
 
     4.15 - 3.15 = 1V
-    310 - 270 = 40 raw ADC steps
+    310 - 210 = 100 raw ADC steps
 
-    So each raw ADC step is 1V / 40 = 0.025V
+    So each raw ADC step is 1V / 100 = 0.01V
     Offset calculation:
-    270 * 0.025 = 6.75V. but we want it to be 3.15V
-    So the offset is 3.15V - 6.75V = -3.6V
+    210 * 0.01 = 2.1V. but we want it to be 3.15V
+    So the offset is 3.15V - 2.1V = 1.05V
     """
-    voltage = raw_adc_value * 0.025 - 3.6
+    voltage = raw_adc_value * 0.01 + 1.05
     return voltage
 
 
